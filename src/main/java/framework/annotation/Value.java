@@ -1,4 +1,4 @@
-package framework.annotations;
+package framework.annotation;
 
 
 import java.lang.annotation.ElementType;
