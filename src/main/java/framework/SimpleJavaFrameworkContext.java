@@ -87,6 +87,7 @@ public class SimpleJavaFrameworkContext {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> clazz) {
         return (T) beans.get(clazz);
     }
