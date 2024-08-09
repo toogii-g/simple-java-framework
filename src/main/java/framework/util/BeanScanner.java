@@ -1,4 +1,4 @@
-package framework;
+package framework.util;
 
 import framework.annotation.Service;
 import framework.handler.beanhandler.BeanHandlerManager;

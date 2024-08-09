@@ -1,5 +1,8 @@
 package framework;
 
+import framework.util.BeanScanner;
+import framework.util.DependencyInjector;
+
 import java.util.HashMap;
 import java.util.Map;
 
