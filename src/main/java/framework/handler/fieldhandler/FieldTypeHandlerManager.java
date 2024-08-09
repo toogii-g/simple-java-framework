@@ -1,6 +1,6 @@
 package framework.handler.fieldhandler;
 
-import framework.interfaces.FieldTypeHandler;
+import framework.handler.beanhandler.FieldTypeHandler;
 
 import java.util.HashMap;
 import java.util.Map;

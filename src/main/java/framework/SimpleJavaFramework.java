@@ -1,6 +1,6 @@
 package framework;
 
-import framework.interfaces.Runnable;
+import framework.util.Runnable;
 
 public class SimpleJavaFramework {
     public static SimpleJavaFrameworkContext run(Class<?> applicationClass, String... args) throws Exception {

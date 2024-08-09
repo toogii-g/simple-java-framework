@@ -1,4 +1,4 @@
-package framework.interfaces;
+package framework.handler.beanhandler;
 
 public interface FieldTypeHandler {
 
