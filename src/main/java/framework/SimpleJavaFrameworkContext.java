@@ -14,10 +14,10 @@ public class SimpleJavaFrameworkContext {
 
     private final Map<Class<?>, Object> beans = new HashMap<>();
 
-    public void start(Class<?> clazz) throws Exception{
+
+    public SimpleJavaFrameworkContext(Class<?> clazz)throws Exception{
         instantiateClasses(clazz);
         doDependencyInjection();
-
     }
 
     private void instantiateClasses(Class<?> clazz){
