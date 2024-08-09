@@ -1,5 +1,7 @@
 package framework;
 
+import framework.interfaces.Autowired;
+import framework.interfaces.Service;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Field;
