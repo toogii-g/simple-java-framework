@@ -1,8 +1,6 @@
 package framework;
 
 import framework.event.ApplicationEventPublisher;
-import framework.event.Event;
-import framework.event.EventListener;
 import framework.event.SimpleEventPublisher;
 import framework.util.BeanScanner;
 import framework.util.DependencyInjector;
@@ -28,7 +26,7 @@ public class SimpleJavaFrameworkContext {
         instantiateClasses(clazz);
         dependencyInjector.doDependencyInjection(beans);
         scheduleTasks();
-      //  registerEventListeners();
+        registerEventListeners();
     }
 
 
@@ -54,4 +52,18 @@ public class SimpleJavaFrameworkContext {
     public <T> T getBean(Class<T> clazz) {
         return (T) beans.get(clazz);
     }
+    private void registerEventListeners() {
+        for (Object bean : beans.values()) {
+            for (Method method : bean.getClass().getDeclaredMethods()) {
+                if (method.isAnnotationPresent(framework.annotation.EventListener.class)) { // Use the fully qualified name
+                    Class<?>[] parameterTypes = method.getParameterTypes();
+                    if (parameterTypes.length == 1) {
+                        Class<?> eventType = parameterTypes[0];
+                        ((SimpleEventPublisher) eventPublisher).registerListener(bean, method, eventType);
+                    }
+                }
+            }
+        }
+    }
+
 }
