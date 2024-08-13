@@ -19,6 +19,11 @@ public class FieldTypeHandlerManager {
         handlers.put(Boolean.class, new BooleanHandler());
     }
 
+
+    public void addHandler(Class<?> fieldType, FieldTypeHandler fieldTypeHandler) {
+        handlers.put(fieldType, fieldTypeHandler);
+    }
+
     public Object convertToFieldType(Class<?> fieldType, String value) {
         return handlers.getOrDefault(fieldType, defaultHandler).convert(value);
     }
