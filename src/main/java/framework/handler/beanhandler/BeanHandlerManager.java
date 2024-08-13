@@ -11,6 +11,7 @@ public class BeanHandlerManager {
     public BeanHandlerManager() {
         handlers.add(new ServiceScanHandler());
         handlers.add(new ApplicationInstanceHandler());
+        handlers.add(new ConfigurationPropertiesHandler());
     }
 
     public Map<Class<?>, Object> handleAll(Map<Class<?>, Object> beans, Class<?> clazz) {
