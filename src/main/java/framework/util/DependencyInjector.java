@@ -23,18 +23,31 @@ public class DependencyInjector {
 
     private final Properties properties = new Properties();
 
+    private String activeProfile;
+
+
     public void loadProperties() {
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties")) {
             if (input != null) {
                 properties.load(input);
+                activeProfile = properties.getProperty("profiles.active", "default");
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public String getActiveProfile() {
+        return activeProfile;
+    }
+
+
     public void doDependencyInjection(Map<Class<?>, Object> beans) throws Exception {
 
+
+
+//    public void doDependencyInjection(Map<Class<?>, Object> beans) throws IllegalAccessException {
+//>>>>>>> 343024ffd3c95b7c714f40c83079b63a2b2baeb1
         for (Object bean : beans.values()) {
             injectConstructorDependencies(bean, beans);
             injectFieldDependencies(bean, beans);

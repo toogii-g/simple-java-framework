@@ -12,12 +12,13 @@ public class BeanHandlerManager {
         handlers.add(new ServiceScanHandler());
         handlers.add(new ApplicationInstanceHandler());
         handlers.add(new ConfigurationPropertiesHandler());
+        handlers.add(new AsyncHandler());
     }
 
-    public Map<Class<?>, Object> handleAll(Map<Class<?>, Object> beans, Class<?> clazz) {
+    public Map<Class<?>, Object> handleAll(Map<Class<?>, Object> beans, Class<?> clazz, String activeProfile) {
         try {
             for (BeanHandler handler : handlers) {
-                handler.handle(beans, clazz);
+                handler.handle(beans, clazz, activeProfile);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
