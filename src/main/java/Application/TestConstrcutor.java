@@ -14,6 +14,7 @@ public class TestConstrcutor implements ITestConstructor {
         this.iSingleImplementation = iSingleImplementation;
     }
     public  void test(){
+
         iSingleImplementation.print();
     }
 
