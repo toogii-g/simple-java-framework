@@ -25,10 +25,9 @@ public class ServiceScanHandler implements BeanHandler{
     private boolean isActiveProfile(Class<?> clazz, String activeProfile) {
         Profile profileAnnotation = clazz.getAnnotation(Profile.class);
         if (profileAnnotation != null) {
-            // Check if the profile annotation's value matches the active profile
             return profileAnnotation.value().equals(activeProfile);
         }
-        return true; // Default to true if no profile specified
+        return true;
     }
 }
 
