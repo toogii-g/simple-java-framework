@@ -24,6 +24,7 @@ public class SimpleJavaFrameworkContext {
     public SimpleJavaFrameworkContext(Class<?> clazz) throws Exception {
         dependencyInjector.loadProperties();
         instantiateClasses(clazz);
+        System.out.println("All beans="+beans);
         dependencyInjector.doDependencyInjection(beans);
         scheduleTasks();
         registerEventListeners();
@@ -45,6 +46,8 @@ public class SimpleJavaFrameworkContext {
 
     private void instantiateClasses(Class<?> clazz) {
         beans = beanScanner.scanBeans(clazz);
+        // Ensure to scan all relevant packages
+        beans.put(ApplicationEventPublisher.class, new SimpleEventPublisher());
     }
 
 

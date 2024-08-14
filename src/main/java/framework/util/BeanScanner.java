@@ -15,7 +15,6 @@ public class BeanScanner {
     public Map<Class<?>, Object> scanBeans(Class<?> clazz) {
         Map<Class<?>, Object> beans = new HashMap<>();
 
-
         try {
             // Register Event Listeners
            // registerEventListeners(beans);

@@ -1,16 +1,29 @@
 package Application;
 
 import framework.SimpleJavaFramework;
+import framework.SimpleJavaFrameworkContext;
+import framework.annotation.Autowired;
+import framework.annotation.Qualifier;
+import framework.annotation.Service;
 
+@Service
 public class Main implements Runnable {
-    public  static void main(String[] args) throws Exception {
-        System.out.println("Test");
+    @Autowired
+    @Qualifier("Samsung")
+    private IProduct iProduct;
 
-        SimpleJavaFramework.run(Main.class,args) ;
+    @Autowired
+    private  ITestConstructor testConstrcutor;
+
+
+
+    public  static void main(String[] args) throws Exception {
+        new SimpleJavaFramework().run(Main.class,args) ;
     }
 
-    @Override
     public void run() {
-
+     //  iProduct.dispaly();
+        System.out.println("Test......");
+        testConstrcutor.test();
     }
 }

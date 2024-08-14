@@ -3,6 +3,7 @@ package framework.handler.beanhandler;
 import framework.annotation.Service;
 import org.reflections.Reflections;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,8 +15,15 @@ public class ServiceScanHandler implements BeanHandler{
         Set<Class<?>> serviceClasses = reflections.getTypesAnnotatedWith(Service.class);
 
         for (Class<?> serviceClass : serviceClasses) {
-            Object obj = serviceClass.getDeclaredConstructor().newInstance();
-            beans.put(serviceClass, obj);
+            try {
+                Object obj = serviceClass.getDeclaredConstructor().newInstance();
+                beans.put(serviceClass, obj);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
+        System.out.println("service class initialized well");
     }
+
 }
