@@ -24,7 +24,7 @@ public class ConfigurationPropertiesHandler implements BeanHandler {
     }
 
     @Override
-    public void handle(Map<Class<?>, Object> beans, Class<?> clazz) throws Exception {
+    public void handle(Map<Class<?>, Object> beans, Class<?> clazz, String activeProfile) throws Exception {
 
         Reflections reflections = new Reflections(clazz.getPackageName());
         Set<Class<?>> serviceClasses = reflections.getTypesAnnotatedWith(ConfigurationProperties.class);

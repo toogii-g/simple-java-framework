@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface BeanHandler {
 
-    void handle(Map<Class<?>, Object> beans, Class<?> clazz) throws Exception;
+    void handle(Map<Class<?>, Object> beans, Class<?> clazz, String activeProfile) throws Exception;
 }
