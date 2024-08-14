@@ -26,11 +26,10 @@ public class AsyncHandler implements BeanHandler {
     }
 
     private void wrapMethodWithAsync(Object bean, Method method) {
-        Method originalMethod = method;
         executorService.submit(() -> {
             try {
-                originalMethod.setAccessible(true);
-                originalMethod.invoke(bean);
+                method.setAccessible(true);
+                method.invoke(bean);
             } catch (Exception e) {
                 e.printStackTrace();
             }
