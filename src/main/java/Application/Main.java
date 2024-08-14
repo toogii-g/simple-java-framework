@@ -8,29 +8,40 @@ import framework.annotation.Qualifier;
 import framework.annotation.Service;
 import framework.event.ApplicationEventPublisher;
 
+import framework.util.Runnable;
+
+
 @Service
 public class Main implements Runnable {
     @Autowired
-    @Qualifier("Samsung")
+    @Qualifier("OnePlus")
     private IProduct iProduct;
     @Autowired
     private ApplicationEventPublisher eventPublisher;
     @Autowired
     private  ITestConstructor testConstrcutor;
 
-
-
     public  static void main(String[] args) throws Exception {
         new SimpleJavaFramework().run(Main.class,args) ;
     }
-
-    public void run() {
-       //Testing @Qualifier
+    @Override
+    public void run(String... args) {
+        //Constructor Injection
+        //testConstrcutor.test();//OK
+        //Testing @Qualifier
         iProduct.dispaly();
-        //Testing Event
-        // Publish a custom event
-       // eventPublisher.publishEvent(new CustomEvent("Hello from Custom Event!"));
-//        System.out.println("Test......");
-       // testConstrcutor.test();
     }
+
+//    public void run() {
+//       //Testing @Qualifier
+//      //  iProduct.dispaly();
+//        //Testing Event
+//        // Publish a custom event
+//       // eventPublisher.publishEvent(new CustomEvent("Hello from Custom Event!"));
+////        System.out.println("Test......");
+
+//
+//
+//    }
+
 }

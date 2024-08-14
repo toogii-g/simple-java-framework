@@ -1,5 +1,2 @@
-package Application;
-
-public interface ISingleImplementation {
-    void print();
+package Application;public interface ISingleImplementation {
 }
