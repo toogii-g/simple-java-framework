@@ -1,9 +1,11 @@
 package Application.dao;
 
 import Application.domain.Customer;
+import framework.annotation.Service;
 
 import java.util.HashMap;
 
+@Service
 public class MockCustomerDAO implements ICustomerDAO{
     private HashMap<String, Customer> customerHashMap = new HashMap<>();
 

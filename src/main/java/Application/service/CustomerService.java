@@ -9,9 +9,9 @@ import framework.annotation.Service;
 
 @Service
 public class CustomerService implements ICustomerService {
-//    @Autowired
-//    @Qualifier("MockCustomerDAO")
-//    private ICustomerDAO iCustomerDAO;
+    @Autowired
+    @Qualifier("MockCustomerDAO")
+    private ICustomerDAO iCustomerDAO;
     private ILogger iLogger;
 
     @Autowired
@@ -20,7 +20,7 @@ public class CustomerService implements ICustomerService {
     }
 
     public void addCustomer(String firstName, String lastName){
-        //iCustomerDAO.save(new Customer(firstName, lastName));
+        iCustomerDAO.save(new Customer(firstName, lastName));
         iLogger.log("Customer created");
     }
 }

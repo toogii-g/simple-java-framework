@@ -2,9 +2,11 @@ package Application.dao;
 
 import Application.domain.Contact;
 import Application.domain.Customer;
+import framework.annotation.Service;
 
 import java.util.HashMap;
 
+@Service
 public class CustomerDAO implements ICustomerDAO{
     private HashMap<String, Customer> customerHashMap = new HashMap<>();
 
