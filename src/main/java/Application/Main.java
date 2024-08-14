@@ -23,6 +23,8 @@ public class Main implements Runnable {
 
     public  static void main(String[] args) throws Exception {
         new SimpleJavaFramework().run(Main.class,args) ;
+        System.out.println("Test");
+        SimpleJavaFramework.run(Main.class,args) ;
     }
     @Override
     public void run(String... args) {
