@@ -3,7 +3,7 @@ package Application;
 import framework.annotation.Autowired;
 import framework.annotation.Service;
 
-@Service
+
 public class TestConstrcutor implements ITestConstructor {
     private  ISingleImplementation iSingleImplementation;
 
@@ -15,7 +15,7 @@ public class TestConstrcutor implements ITestConstructor {
     }
     public  void test(){
 
-        iSingleImplementation.print();
+      // iSingleImplementation.print();
     }
 
 }

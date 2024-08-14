@@ -49,9 +49,11 @@ public class DependencyInjector {
 //    public void doDependencyInjection(Map<Class<?>, Object> beans) throws IllegalAccessException {
 //>>>>>>> 343024ffd3c95b7c714f40c83079b63a2b2baeb1
         for (Object bean : beans.values()) {
-            injectConstructorDependencies(bean, beans);
-            injectFieldDependencies(bean, beans);
-            injectSetterDependencies(bean, beans);
+            System.out.println("wtf is happening: class: "+bean.getClass()+ " "+beans.get(bean.getClass()));
+            injectConstructorDependencies(beans.get(bean.getClass()), beans);
+            System.out.println(beans.get(bean.getClass()));
+            injectFieldDependencies(beans.get(bean.getClass()), beans);
+            injectSetterDependencies(beans.get(bean.getClass()), beans);
         }
 
 
@@ -81,8 +83,9 @@ public class DependencyInjector {
                     dependencies[i] = findDependency(parameterTypes[i], beans);
                 }
                 constructor.setAccessible(true);
-                System.out.println("====>Dependencies="+dependencies);
+                System.out.println("====>Dependencies="+dependencies.getClass());
                 Object newBean = constructor.newInstance(dependencies);
+                System.out.println("Constructor created object: "+newBean);
                 beans.put(bean.getClass(), newBean);
                 return;
             }
@@ -93,7 +96,7 @@ public class DependencyInjector {
             field.setAccessible(true);
             if (field.isAnnotationPresent(Autowired.class)) {
                 Object dependency = findDependency(field, beans);
-                System.out.println("injectFieldDependencies=====" + field.getType() + " "+dependency);
+                System.out.println("injectFieldDependencies=====" + field.getType() + " "+dependency +" the bean"+bean);
                 field.set(bean, dependency);
             } else if (field.isAnnotationPresent(Value.class)) {
                 String val = properties.getProperty(field.getAnnotation(Value.class).value());

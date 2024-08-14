@@ -31,7 +31,7 @@ public class SimpleJavaFrameworkContext {
 
         dependencyInjector.doDependencyInjection(beans);
         scheduleTasks();
-        registerEventListeners();
+        //registerEventListeners();
     }
 
 
@@ -53,7 +53,7 @@ public class SimpleJavaFrameworkContext {
 
         beans = beanScanner.scanBeans(clazz);
         // Ensure to scan all relevant packages
-        beans.put(ApplicationEventPublisher.class, new SimpleEventPublisher());
+        //beans.put(ApplicationEventPublisher.class, new SimpleEventPublisher());
     }
 
 
