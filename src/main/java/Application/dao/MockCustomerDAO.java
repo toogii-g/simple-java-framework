@@ -1,15 +1,14 @@
 package Application.dao;
 
-import Application.domain.Contact;
 import Application.domain.Customer;
 
 import java.util.HashMap;
 
-public class CustomerDAO implements ICustomerDAO{
+public class MockCustomerDAO implements ICustomerDAO{
     private HashMap<String, Customer> customerHashMap = new HashMap<>();
 
     public void save(Customer customer){
-        System.out.println("CustomerDAO: DB customer added");
+        System.out.println("MockCustomerDAO: DB customer added");
         customerHashMap.put(customer.getFirstName(), customer);
     }
 
