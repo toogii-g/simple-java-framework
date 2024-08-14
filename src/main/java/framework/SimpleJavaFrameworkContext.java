@@ -25,10 +25,13 @@ public class SimpleJavaFrameworkContext {
         dependencyInjector.loadProperties();
         String activeProfile = dependencyInjector.getActiveProfile();
         beanScanner = new BeanScanner(activeProfile);
+       // instantiateClasses(clazz);
         instantiateClasses(clazz,activeProfile);
+        System.out.println("All beans="+beans);
+
         dependencyInjector.doDependencyInjection(beans);
         scheduleTasks();
-        registerEventListeners();
+        //registerEventListeners();
     }
 
 
@@ -49,6 +52,8 @@ public class SimpleJavaFrameworkContext {
 
 
         beans = beanScanner.scanBeans(clazz);
+        // Ensure to scan all relevant packages
+        //beans.put(ApplicationEventPublisher.class, new SimpleEventPublisher());
     }
 
 
