@@ -117,6 +117,7 @@ public class DependencyInjector {
         }
     }
     private Object findDependency(Class<?> type, Map<Class<?>, Object> beans) {
+        if(type.isInterface()){
         for(Class beanClass: beans.keySet()){
             Class<?>[] interfaces = beanClass.getInterfaces();
             for (Class<?> anInterface : interfaces) {
@@ -125,11 +126,14 @@ public class DependencyInjector {
                 }
             }
         }
+        } else{
+            for (Class<?> beanClass : beans.keySet()) {
+                if (type.isAssignableFrom(beanClass)) {
+                    return beans.get(beanClass);
+                }
+            }
+        }
         return null;
-//        return beans.values().stream()
-//                .filter(bean -> type.isAssignableFrom(bean.getClass()))
-//                .findFirst()
-//                .orElseThrow(() -> new RuntimeException("No bean found for type: " + type));
     }
 
     private Object findDependency(Field field, Map<Class<?>, Object> beans) {
