@@ -25,7 +25,6 @@ public class Application implements Runnable {
 
     @Override
     public void run(String... args) {
-        System.out.println("Hello");
         iContactService.addContact("012-345-678", "johndoe@miu.edu");
         iCustomerService.addCustomer("John", "Dow");
 

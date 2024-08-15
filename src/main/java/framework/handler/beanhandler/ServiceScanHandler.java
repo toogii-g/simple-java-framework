@@ -31,7 +31,6 @@ public class ServiceScanHandler implements BeanHandler{
             }
 
         }
-        System.out.println("service class initialized well");
     }
 
 

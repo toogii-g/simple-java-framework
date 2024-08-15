@@ -19,19 +19,16 @@ public class SimpleJavaFrameworkContext {
     private Map<Class<?>, Object> beans = new HashMap<>();
     private final Scheduler scheduler = new Scheduler();
     DependencyInjector dependencyInjector = new DependencyInjector();
-    private final ApplicationEventPublisher eventPublisher = new SimpleEventPublisher();
+    private final SimpleEventPublisher eventPublisher = SimpleEventPublisher.getSimpleEventPublisher();
     BeanScanner beanScanner;
     public SimpleJavaFrameworkContext(Class<?> clazz) throws Exception {
         dependencyInjector.loadProperties();
         String activeProfile = dependencyInjector.getActiveProfile();
         beanScanner = new BeanScanner(activeProfile);
-       // instantiateClasses(clazz);
         instantiateClasses(clazz,activeProfile);
-        System.out.println("All beans="+beans);
-
         dependencyInjector.doDependencyInjection(beans);
         scheduleTasks();
-        //registerEventListeners();
+        registerEventListeners();
     }
 
 
@@ -53,7 +50,7 @@ public class SimpleJavaFrameworkContext {
 
         beans = beanScanner.scanBeans(clazz);
         // Ensure to scan all relevant packages
-        //beans.put(ApplicationEventPublisher.class, new SimpleEventPublisher());
+        beans.put(SimpleEventPublisher.class, SimpleEventPublisher.getSimpleEventPublisher());
     }
 
 
