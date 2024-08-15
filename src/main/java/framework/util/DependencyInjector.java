@@ -44,48 +44,23 @@ public class DependencyInjector {
 
     public void doDependencyInjection(Map<Class<?>, Object> beans) throws Exception {
 
-
-
-//    public void doDependencyInjection(Map<Class<?>, Object> beans) throws IllegalAccessException {
-//>>>>>>> 343024ffd3c95b7c714f40c83079b63a2b2baeb1
         for (Object bean : beans.values()) {
-            System.out.println("wtf is happening: class: "+bean.getClass()+ " "+beans.get(bean.getClass()));
             injectConstructorDependencies(beans.get(bean.getClass()), beans);
-            System.out.println(beans.get(bean.getClass()));
             injectFieldDependencies(beans.get(bean.getClass()), beans);
             injectSetterDependencies(beans.get(bean.getClass()), beans);
         }
-
-
-//        for (Object bean : beans.values()) {
-//            for (Field field : bean.getClass().getDeclaredFields()) {
-//                field.setAccessible(true);
-//                if (field.isAnnotationPresent(Autowired.class)) {
-//                    Object dependency = beans.get(field.getType());
-//                    field.set(bean, dependency);
-//                } else if (field.isAnnotationPresent(Value.class)) {
-//                    String val = properties.getProperty(field.getAnnotation(Value.class).value());
-//                    field.set(bean, converter.convertToFieldType(field.getType(), val));
-//                }
-//            }
-//        }
         }
     private void injectConstructorDependencies(Object bean, Map<Class<?>, Object> beans) throws Exception {
-        System.out.println("starting constructor injection for bean="+bean.getClass());
         Constructor<?>[] constructors = bean.getClass().getDeclaredConstructors();
         for (Constructor<?> constructor : constructors) {
-            System.out.println("inside constructor forloop constructor:"+constructor.getName());
             if (constructor.isAnnotationPresent(Autowired.class)) {
-                System.out.println("constructor: is annotaton autowired present");
                 Class<?>[] parameterTypes = constructor.getParameterTypes();
                 Object[] dependencies = new Object[parameterTypes.length];
                 for (int i = 0; i < parameterTypes.length; i++) {
                     dependencies[i] = findDependency(parameterTypes[i], beans);
                 }
                 constructor.setAccessible(true);
-                System.out.println("====>Dependencies="+dependencies.getClass());
                 Object newBean = constructor.newInstance(dependencies);
-                System.out.println("Constructor created object: "+newBean);
                 beans.put(bean.getClass(), newBean);
                 return;
             }
@@ -96,7 +71,6 @@ public class DependencyInjector {
             field.setAccessible(true);
             if (field.isAnnotationPresent(Autowired.class)) {
                 Object dependency = findDependency(field, beans);
-                System.out.println("injectFieldDependencies=====" + field.getType() + " "+dependency +" the bean"+bean);
                 field.set(bean, dependency);
             } else if (field.isAnnotationPresent(Value.class)) {
                 String val = properties.getProperty(field.getAnnotation(Value.class).value());
@@ -138,11 +112,9 @@ public class DependencyInjector {
 
     private Object findDependency(Field field, Map<Class<?>, Object> beans) {
         if (field.isAnnotationPresent(Qualifier.class)) {
-            System.out.println("Qualifier=====" + field.getName() +" "+field.getType());
             String qualifierValue = field.getAnnotation(Qualifier.class).value();
             //findQualifiedDependency(beans, interface, className)
             Object ret =  findQualifiedDependency(beans, field.getType(), qualifierValue);
-            System.out.println(ret);
             return ret;
         } else {
             return findDependency(field.getType(), beans);
@@ -159,16 +131,7 @@ public class DependencyInjector {
             }
         }
         return null;
-//        Optional<Object> qualifiedBean = beans.values().stream()
-//                .filter(bean -> type.isAssignableFrom(bean.getClass()) && bean.getClass().isAnnotationPresent(Service.class))
-//                .filter(bean -> {
-//                    Qualifier qualifier = bean.getClass().getAnnotation(Qualifier.class);
-//                    return qualifier != null && qualifier.value().equals(qualifierValue);
-//                })
-//                .findFirst();
-//
-//        return qualifiedBean.orElseThrow(() -> new RuntimeException(
-//                "No qualifying bean of type " + type.getName() + " with qualifier '" + qualifierValue + "' found"));
+
     }
 
 }

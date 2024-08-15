@@ -1,12 +1,24 @@
 package framework.event;
 
+import framework.annotation.Service;
+
 import java.lang.reflect.Method;
 import java.util.*;
-
+@Service
 public class SimpleEventPublisher implements ApplicationEventPublisher {
     private final Map<Class<?>, Set<Method>> eventListeners = new HashMap<>();
     private final Map<Object, Object> listenerBeans = new HashMap<>();
 
+    private static SimpleEventPublisher simpleEventPublisher;
+    private SimpleEventPublisher(){
+
+    }
+    public static SimpleEventPublisher getSimpleEventPublisher(){
+        if(simpleEventPublisher==null){
+            simpleEventPublisher = new SimpleEventPublisher();
+        }
+        return simpleEventPublisher;
+    }
     @Override
     public void publishEvent(Object event) {
         Class<?> eventType = event.getClass();
