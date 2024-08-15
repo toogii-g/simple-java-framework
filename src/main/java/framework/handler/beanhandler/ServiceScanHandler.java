@@ -16,16 +16,13 @@ public class ServiceScanHandler implements BeanHandler{
         Set<Class<?>> serviceClasses = reflections.getTypesAnnotatedWith(Service.class);
 
         for (Class<?> serviceClass : serviceClasses) {
-
+            if (isActiveProfile(serviceClass, activeProfile)) {
             try {
                 Object obj = serviceClass.getDeclaredConstructor().newInstance();
                 beans.put(serviceClass, obj);
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-
-            if (isActiveProfile(serviceClass, activeProfile)) {
                 Object obj = serviceClass.getDeclaredConstructor().newInstance();
                 beans.put(serviceClass, obj);
             }
