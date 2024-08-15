@@ -14,18 +14,6 @@ import java.util.Set;
 public class BeanScanner {
 
     private final String activeProfile;
-//        try {
-//            // Register Event Listeners
-//           // registerEventListeners(beans);
-//            BeanHandlerManager handlerManager = new BeanHandlerManager();
-//            return handlerManager.handleAll(beans, clazz);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        System.out.println(beans);
-//
-//        return beans;
 
     public BeanScanner(String activeProfile) {
         this.activeProfile = activeProfile;

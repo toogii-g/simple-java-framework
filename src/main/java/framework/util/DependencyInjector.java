@@ -92,7 +92,7 @@ public class DependencyInjector {
     }
     private Object findDependency(Class<?> type, Map<Class<?>, Object> beans) {
         if(type.isInterface()){
-        for(Class beanClass: beans.keySet()){
+        for(Class<?> beanClass: beans.keySet()){
             Class<?>[] interfaces = beanClass.getInterfaces();
             for (Class<?> anInterface : interfaces) {
                 if(anInterface.getName().equals(type.getName())){
@@ -113,7 +113,6 @@ public class DependencyInjector {
     private Object findDependency(Field field, Map<Class<?>, Object> beans) {
         if (field.isAnnotationPresent(Qualifier.class)) {
             String qualifierValue = field.getAnnotation(Qualifier.class).value();
-            //findQualifiedDependency(beans, interface, className)
             Object ret =  findQualifiedDependency(beans, field.getType(), qualifierValue);
             return ret;
         } else {
